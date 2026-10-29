@@ -3,11 +3,14 @@ precision highp float;
 
 uniform sampler2D u_flow;
 uniform vec2 u_res;
-uniform float u_time;
+uniform float u_phase;
+uniform float u_motion;
 uniform float u_aspect;
 uniform vec3 u_palette[4];
 uniform float u_strength;
 uniform float u_toolbar;
+uniform float u_height;
+uniform float u_haze;
 
 out vec4 o;
 
@@ -29,15 +32,16 @@ vec2 curtain(vec2 q, float base, float seed, float t, float drift) {
     + 0.03 * sin(t * 0.04 + seed);
   float d = q.y - edge;
   float rise = max(d, 0.0);
-  float body = exp(-rise / 0.2) * exp(-max(-d, 0.0) / 0.025);
+  float body = exp(-rise / (0.2 * u_height)) * exp(-max(-d, 0.0) / 0.025);
   float rays = 0.55 + 0.45 * snoise(vec2(q.x * 9.0 + seed * 3.7 + drift, t * 0.07 + seed));
-  return vec2(body * rays, rise / 0.3);
+  return vec2(body * rays, rise / (0.3 * u_height));
 }
 
 void main() {
   vec2 uv = gl_FragCoord.xy / u_res;
-  vec2 flow = (texture(u_flow, uv).xy - 0.5) * (2.0 * MAX_VELOCITY);
-  float t = u_time;
+  // u_phase is time scaled by the Speed slider; u_motion stills the flow field when Speed is near zero.
+  vec2 flow = (texture(u_flow, uv).xy - 0.5) * (2.0 * MAX_VELOCITY) * u_motion;
+  float t = u_phase;
   vec2 q = vec2(uv.x * u_aspect, uv.y) + flow * 0.03;
   float drift = flow.x * 0.6;
 
@@ -46,11 +50,11 @@ void main() {
   vec2 high = curtain(q, 0.76, 4.4, t * 1.1, drift);
 
   float hazeField = fbm2(q * 0.8 + vec2(t * 0.012, -t * 0.009) + flow * 0.2);
-  float haze = 0.28 + 0.14 * hazeField;
+  float haze = (0.28 + 0.14 * hazeField) * u_haze;
 
   vec3 lit = palette(low.y) * low.x + palette(mid.y) * mid.x + palette(high.y) * high.x
     + palette(0.75 + 0.2 * hazeField) * haze;
-  float weight = low.x + mid.x + high.x + haze;
+  float weight = max(low.x + mid.x + high.x + haze, 1e-4);
   vec3 rgb = clamp(oklabToSrgb(lit / weight), 0.0, 1.0);
 
   // Drawdy's toolbar runs along the top, where its small icons need the most contrast.

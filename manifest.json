@@ -1,9 +1,9 @@
 {
     "driverId": "mickyngub.aurora",
     "driverName": "Aurora",
-    "driverVersion": "0.1.0",
-    "description": "Let your board glow. Click the aurora button and slow northern lights drift across your whole board while you draw, in Drawdy's lime with teal and violet. It's a soft wash your clicks pass straight through, kept lighter behind the top toolbar, and it follows the light or dark theme. Only you see it, and nothing goes on the board. Made for long whiteboard sessions, late-night sketching and screen shares that need a little mood.",
+    "driverVersion": "0.2.0",
+    "description": "Let your board glow. Click the aurora button and slow northern lights drift across your whole board while you draw. Start from Aurora, Ocean, Sunset, Nebula, Ember or Quiet, then make it yours with sliders for strength, speed, colour, curtain height and haze, live as you drag. Clicks pass straight through and only you see it. Made for long whiteboard sessions, late-night sketching and screen shares that need a little mood.",
     "icon": "icon.png",
     "main": "main.js",
-    "permissions": ["dom"]
+    "permissions": ["dom", "storage"]
 }
