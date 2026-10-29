@@ -5,8 +5,10 @@ import {
     DEFAULT_SETTINGS,
     SETTINGS_MESSAGE,
     SLIDERS,
+    patternById,
     readSettings,
     startFrom,
+    type PatternId,
     type PresetId,
     type Settings,
 } from "../src/settings";
@@ -28,6 +30,9 @@ const byId = <T extends HTMLElement>(id: string) =>
 
 const stylingEl = byId<HTMLStyleElement>("drawdy-styling");
 const enabledEl = byId<HTMLInputElement>("enabled");
+const patternEls = [
+    ...document.querySelectorAll<HTMLButtonElement>("[data-pattern]"),
+];
 const presetEls = [
     ...document.querySelectorAll<HTMLButtonElement>("[data-preset]"),
 ];
@@ -41,6 +46,19 @@ let lastAck = -Infinity;
 let commitTimer: ReturnType<typeof setTimeout> | undefined;
 
 function render(): void {
+    for (const el of patternEls)
+        el.setAttribute(
+            "aria-pressed",
+            String(el.dataset.pattern === settings.pattern)
+        );
+    byId<HTMLLabelElement>("label-height").textContent = patternById(
+        settings.pattern
+    ).scaleLabel;
+    for (const el of patternEls)
+        el.addEventListener("click", () =>
+            apply({ ...settings, pattern: el.dataset.pattern as PatternId })
+        );
+
     for (const el of presetEls)
         el.setAttribute(
             "aria-pressed",
@@ -115,11 +133,11 @@ for (const slider of SLIDERS) {
 
 for (const el of presetEls)
     el.addEventListener("click", () =>
-        apply(startFrom(el.dataset.preset as PresetId))
+        apply(startFrom(el.dataset.preset as PresetId, settings.pattern))
     );
 
 byId<HTMLButtonElement>("reset").addEventListener("click", () =>
-    apply(startFrom(settings.preset))
+    apply(startFrom(settings.preset, settings.pattern))
 );
 
 enabledEl.addEventListener("change", () =>

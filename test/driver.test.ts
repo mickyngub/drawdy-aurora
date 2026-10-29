@@ -175,6 +175,13 @@ test("settings that never reached the overlay reload it", async () => {
     assert.deepEqual(lookIn(host.overlays()[1]).settings, settings);
 });
 
+test("a new pattern reaches the overlay page when it reloads", async () => {
+    const host = await boot({ enabled: true });
+    const settings = startFrom("mono", "glyphs");
+    await host.fromPanel({ type: "settings", settings, live: false });
+    assert.equal(lookIn(host.overlays()[1]).settings.pattern, "glyphs");
+});
+
 test("settings from the panel are clamped before use", async () => {
     const host = await boot({ enabled: true });
     await host.fromPanel({

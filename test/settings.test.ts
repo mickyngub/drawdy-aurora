@@ -3,6 +3,7 @@ import { test } from "node:test";
 import { paletteFor, strengthFor } from "../src/look";
 import {
     DEFAULT_SETTINGS,
+    PATTERNS,
     PRESETS,
     SLIDERS,
     readSettings,
@@ -67,4 +68,14 @@ test("strength scales with the slider and is capped so the board stays readable"
         strengthFor(readSettings({ strength: 2 }), DARK) >
             strengthFor(DEFAULT_SETTINGS, DARK)
     );
+});
+
+test("the pattern is read, defaults to Curtains and survives a new starting point", () => {
+    assert.equal(DEFAULT_SETTINGS.pattern, "curtains");
+    assert.equal(readSettings({ pattern: "glyphs" }).pattern, "glyphs");
+    assert.equal(readSettings({ pattern: "plaid" }).pattern, "curtains");
+    assert.equal(startFrom("neon", "dots").pattern, "dots");
+    assert.equal(startFrom("neon", "dots").preset, "neon");
+    for (const pattern of PATTERNS)
+        assert.equal(readSettings({ pattern: pattern.id }).pattern, pattern.id);
 });

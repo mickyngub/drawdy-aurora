@@ -5,14 +5,21 @@ import {
     SECONDARY,
     SECTION,
     SECTION_LABEL,
+    SEGMENT,
     SLIDER,
     SWATCH,
+    TRACK,
 } from "../webview/classes";
 import { PANEL_CSS } from "./panel-css";
-import { PRESETS, SLIDERS } from "./settings";
+import { PATTERNS, PRESETS, SLIDERS } from "./settings";
 
 const TICK =
     '<svg class="pointer-events-none invisible col-start-1 row-start-1 size-3 text-on-accent peer-checked:visible" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"/></svg>';
+
+const patternButtons = PATTERNS.map(
+    (p) =>
+        `<button type="button" class="${SEGMENT}" data-pattern="${p.id}" aria-pressed="false">${p.label}</button>`
+).join("\n");
 
 const presetButtons = PRESETS.map(
     (p) =>
@@ -21,7 +28,7 @@ const presetButtons = PRESETS.map(
 
 const sliders = SLIDERS.map(
     (s) => `<section class="${SECTION}">
-    <div class="${SECTION_LABEL}"><label for="slider-${s.key}">${s.label}</label><output id="value-${s.key}" for="slider-${s.key}" class="text-fg-subtle tabular-nums"></output></div>
+    <div class="${SECTION_LABEL}"><label id="label-${s.key}" for="slider-${s.key}">${s.label}</label><output id="value-${s.key}" for="slider-${s.key}" class="text-fg-subtle tabular-nums"></output></div>
     <input id="slider-${s.key}" data-setting="${s.key}" type="range" min="${s.min}" max="${s.max}" step="${s.step}" class="${SLIDER}" />
 </section>`
 ).join("\n");
@@ -32,6 +39,12 @@ const BODY = `
         <label class="inline-flex cursor-pointer items-center gap-2 text-label text-fg-muted select-none"><span class="grid place-items-center"><input type="checkbox" id="enabled" class="${CHECKBOX}" />${TICK}</span>Show the aurora</label>
         <button type="button" id="reset" class="${SECONDARY}">Reset</button>
     </div>
+    <section class="${SECTION}">
+        <div class="${SECTION_LABEL}"><span>Pattern</span></div>
+        <div class="${TRACK}" role="group" aria-label="Pattern">
+${patternButtons}
+        </div>
+    </section>
     <section class="${SECTION}">
         <div class="${SECTION_LABEL}"><span>Start from</span></div>
         <div class="${PRESET_GRID}" role="group" aria-label="Start from">

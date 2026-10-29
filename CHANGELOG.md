@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+- four patterns: Curtains, Glyphs (a textmode wave of rings and crosses), Dots and Contours
+- two more starting points: Mono and Neon
+- the scale slider is named for the pattern: curtain height, cell size, dot spacing or line spacing
+
 ## 0.2.0
 
 - the aurora button now opens a panel; the first time, it also turns the aurora on

@@ -1,8 +1,8 @@
 {
     "driverId": "mickyngub.aurora",
     "driverName": "Aurora",
-    "driverVersion": "0.2.0",
-    "description": "Let your board glow. Click the aurora button and slow northern lights drift across your whole board while you draw. Start from Aurora, Ocean, Sunset, Nebula, Ember or Quiet, then make it yours with sliders for strength, speed, colour, curtain height and haze, live as you drag. Clicks pass straight through and only you see it. Made for long whiteboard sessions, late-night sketching and screen shares that need a little mood.",
+    "driverVersion": "0.3.0",
+    "description": "Let your board glow. Click the aurora button and a living pattern drifts across your whole board while you draw: aurora curtains, a textmode glyph wave, halftone dots or contour lines. Start from one of eight colour sets, then tune strength, speed, colour, scale and haze, live as you drag. Clicks pass straight through and only you see it. Made for long whiteboard sessions, late-night sketching and screen shares that need a little mood.",
     "icon": "icon.png",
     "main": "main.js",
     "permissions": ["dom", "storage"]

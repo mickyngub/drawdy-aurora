@@ -1,9 +1,19 @@
+export type PatternId = "curtains" | "glyphs" | "dots" | "contours";
+
 export type PresetId =
-    "aurora" | "ocean" | "sunset" | "nebula" | "ember" | "quiet";
+    | "aurora"
+    | "ocean"
+    | "sunset"
+    | "nebula"
+    | "ember"
+    | "quiet"
+    | "mono"
+    | "neon";
 
 export type Palette = [string, string, string, string];
 
 export type Settings = {
+    pattern: PatternId;
     preset: PresetId;
     strength: number;
     speed: number;
@@ -12,14 +22,16 @@ export type Settings = {
     haze: number;
 };
 
-export type SliderKey = Exclude<keyof Settings, "preset">;
+export type SliderKey = Exclude<keyof Settings, "pattern" | "preset">;
+
+export type Pattern = { id: PatternId; label: string; scaleLabel: string };
 
 export type Preset = {
     id: PresetId;
     label: string;
     dark: Palette;
     light: Palette;
-    start: Omit<Settings, "preset">;
+    start: Record<SliderKey, number>;
 };
 
 export type Slider = {
@@ -30,6 +42,13 @@ export type Slider = {
     step: number;
     format: (value: number) => string;
 };
+
+export const PATTERNS: readonly Pattern[] = [
+    { id: "curtains", label: "Curtains", scaleLabel: "Curtain height" },
+    { id: "glyphs", label: "Glyphs", scaleLabel: "Cell size" },
+    { id: "dots", label: "Dots", scaleLabel: "Dot spacing" },
+    { id: "contours", label: "Contours", scaleLabel: "Line spacing" },
+];
 
 export const PRESETS: readonly Preset[] = [
     {
@@ -74,6 +93,20 @@ export const PRESETS: readonly Preset[] = [
         light: ["#6ee7b7", "#38bdf8", "#a78bfa", "#c084fc"],
         start: { strength: 0.6, speed: 0.4, hue: 0, height: 0.8, haze: 0.7 },
     },
+    {
+        id: "mono",
+        label: "Mono",
+        dark: ["#f4f4f5", "#d4d4d8", "#a1a1aa", "#71717a"],
+        light: ["#27272a", "#3f3f46", "#52525b", "#71717a"],
+        start: { strength: 1, speed: 1, hue: 0, height: 1, haze: 0.5 },
+    },
+    {
+        id: "neon",
+        label: "Neon",
+        dark: ["#ff00ff", "#c800ff", "#9600ff", "#3c00ff"],
+        light: ["#d000d0", "#a000e0", "#7a00e0", "#3c00d0"],
+        start: { strength: 1.1, speed: 1.2, hue: 0, height: 1, haze: 0.8 },
+    },
 ];
 
 const percent = (value: number): string => `${Math.round(value * 100)}%`;
@@ -105,7 +138,7 @@ export const SLIDERS: readonly Slider[] = [
     },
     {
         key: "height",
-        label: "Curtain height",
+        label: "Scale",
         min: 0.4,
         max: 2.2,
         step: 0.05,
@@ -127,7 +160,14 @@ export const ACK_MESSAGE = "mickyngub.aurora:ack";
 export const presetById = (id: PresetId): Preset =>
     PRESETS.find((p) => p.id === id) ?? PRESETS[0];
 
-export const startFrom = (id: PresetId): Settings => ({
+export const patternById = (id: PatternId): Pattern =>
+    PATTERNS.find((p) => p.id === id) ?? PATTERNS[0];
+
+export const startFrom = (
+    id: PresetId,
+    pattern: PatternId = "curtains"
+): Settings => ({
+    pattern: patternById(pattern).id,
     preset: presetById(id).id,
     ...presetById(id).start,
 });
@@ -139,8 +179,10 @@ export function readSettings(value: unknown): Settings {
         typeof value === "object" && value !== null
             ? (value as Record<string, unknown>)
             : {};
-    const known = PRESETS.find((p) => p.id === raw.preset);
-    const settings = startFrom(known ? known.id : "aurora");
+    const preset = PRESETS.find((p) => p.id === raw.preset)?.id ?? "aurora";
+    const pattern =
+        PATTERNS.find((p) => p.id === raw.pattern)?.id ?? "curtains";
+    const settings = startFrom(preset, pattern);
     for (const { key, min, max } of SLIDERS) {
         const n = raw[key];
         if (typeof n === "number" && Number.isFinite(n))

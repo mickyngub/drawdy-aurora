@@ -2,14 +2,14 @@
 
 **let your board glow.**
 
-Slow northern lights drift across your whole board while you draw. Pick a starting point, tune it with a few sliders, and watch the board change as you drag.
+A living pattern drifts across your whole board while you draw: aurora curtains, a textmode glyph wave, halftone dots or contour lines. Pick a pattern and a starting point, tune it with a few sliders, and watch the board change as you drag.
 
 ---
 
 ## let's glow ٩(◕‿◕)۶
 
 1. Click the **aurora waves** in the extension rail. The Aurora panel opens and the glow fades in.
-2. Under **Start from**, pick Aurora, Ocean, Sunset, Nebula, Ember or Quiet.
+2. Pick a **Pattern**, then a colour set under **Start from**.
 3. Drag the sliders to make it yours; the board follows as you drag.
 4. Untick **Show the aurora** to turn it off. Your look is kept for next time.
 
@@ -19,10 +19,12 @@ Slow northern lights drift across your whole board while you draw. Pick a starti
 
 ## make it yours (｡•̀ᴗ-)✧
 
+- **Pattern**: Curtains, Glyphs, Dots or Contours.
+- **Start from**: Aurora, Ocean, Sunset, Nebula, Ember, Quiet, Mono or Neon, each with its own colours and slider settings.
 - **Strength**: from a whisper to a full sky.
 - **Speed**: from frozen to lively.
 - **Colour shift**: turns every colour of the starting point around the colour wheel.
-- **Curtain height**: short bright bands or tall rays.
+- **Scale**: curtain height, glyph cell size, dot spacing or contour line spacing, depending on the pattern.
 - **Haze**: the soft glow between the curtains.
 - **Reset** takes the sliders back to the starting point you picked.
 
@@ -33,6 +35,8 @@ Slow northern lights drift across your whole board while you draw. Pick a starti
 - **Quiet** at low speed for long focused sessions.
 - **Nebula** with tall curtains for a late-night sketch.
 - **Ember** with the colour shifted a little for a warm demo on a screen share.
+- **Glyphs** in **Mono** or **Neon** for a textmode, hacker-terminal board.
+- **Contours** in **Ocean** with a large line spacing for a calm map-like backdrop.
 
 ---
 
