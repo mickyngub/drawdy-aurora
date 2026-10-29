@@ -1,0 +1,2 @@
+// Drawdy shows this through <img>, where currentColor is black, so every colour is spelled out.
+export const ACTION_BUTTON_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke-linecap="round" stroke-width="2.2"><rect width="24" height="24" rx="6" fill="#16193a"/><path d="M4 9c2.5-3 5-3 8 0s5.5 3 8 0" stroke="#a46bff"/><path d="M4 13c2.5-3 5-3 8 0s5.5 3 8 0" stroke="#1fe0a0"/><path d="M4 17c2.5-3 5-3 8 0s5.5 3 8 0" stroke="#c5f601"/></svg>`;
