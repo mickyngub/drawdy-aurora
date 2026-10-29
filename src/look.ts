@@ -3,7 +3,6 @@ import type { ModuleStyling } from "@drawdy/driver-protocol";
 export type Look = {
     colours: [string, string, string, string];
     strength: number;
-    reach: number;
     grain: number;
 };
 
@@ -22,14 +21,12 @@ export function lookFor(styling: ModuleStyling): Look {
     return styling.theme === "dark"
         ? {
               colours: [lime, "#1fe0a0", "#3b8cff", "#a46bff"],
-              strength: 0.75,
-              reach: 0.42,
+              strength: 0.34,
               grain: 0.03,
           }
         : {
               colours: [lime, "#10b981", "#3b82f6", "#8b5cf6"],
-              strength: 0.55,
-              reach: 0.38,
+              strength: 0.26,
               grain: 0.02,
           };
 }

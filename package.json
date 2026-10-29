@@ -1,7 +1,7 @@
 {
     "name": "drawdy-aurora",
     "version": "1.0.0",
-    "description": "Aurora for Drawdy: a slow WebGL aurora glows along the bottom of your board while you draw.",
+    "description": "Aurora for Drawdy: a slow WebGL aurora drifts across your whole board while you draw.",
     "license": "MIT",
     "private": true,
     "type": "module",

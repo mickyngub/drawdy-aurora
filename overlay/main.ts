@@ -13,11 +13,14 @@ const look = JSON.parse(
 const tint = (colour: string, share: number): string =>
     `color-mix(in oklab, ${colour} ${Math.round(share * 100)}%, transparent)`;
 
-function fallbackGradient({ colours: [c0, c1, , c3], strength }: Look) {
+const TOOLBAR_PX = 64;
+
+function fallbackGradient({ colours: [c0, c1, c2, c3], strength }: Look) {
     return [
-        `radial-gradient(45% 38% at 50% 100%, ${tint(c0, strength)}, transparent 70%)`,
-        `radial-gradient(35% 30% at 32% 100%, ${tint(c1, strength * 0.7)}, transparent 70%)`,
-        `radial-gradient(35% 30% at 68% 100%, ${tint(c3, strength * 0.6)}, transparent 70%)`,
+        `radial-gradient(70% 45% at 30% 85%, ${tint(c0, strength)}, transparent 70%)`,
+        `radial-gradient(60% 40% at 75% 55%, ${tint(c1, strength * 0.8)}, transparent 70%)`,
+        `radial-gradient(70% 45% at 40% 25%, ${tint(c3, strength * 0.7)}, transparent 70%)`,
+        `linear-gradient(${tint(c2, strength * 0.35)}, ${tint(c2, strength * 0.35)})`,
     ].join(", ");
 }
 
@@ -30,6 +33,11 @@ const syncFallback = () =>
 reduced.addEventListener("change", syncFallback);
 syncFallback();
 
+let toolbarShare = TOOLBAR_PX / innerHeight;
+addEventListener("resize", () => {
+    toolbarShare = TOOLBAR_PX / innerHeight;
+});
+
 mountCustom(
     body,
     {
@@ -38,8 +46,8 @@ mountCustom(
         onInit: (context) =>
             context.setVec3Array("u_palette", labStops(look.colours)),
         onFrame: (context) => {
-            context.setFloat("u_reach", look.reach);
             context.setFloat("u_strength", look.strength);
+            context.setFloat("u_toolbar", toolbarShare);
         },
     },
     {
@@ -51,6 +59,11 @@ mountCustom(
         onError: () => {
             failed = true;
             syncFallback();
+
+            let toolbarShare = TOOLBAR_PX / innerHeight;
+            addEventListener("resize", () => {
+                toolbarShare = TOOLBAR_PX / innerHeight;
+            });
         },
     }
 );
