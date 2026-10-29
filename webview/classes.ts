@@ -12,3 +12,11 @@ export const SLIDER = `h-1.5 w-full cursor-pointer appearance-none rounded-full 
 export const CHECKBOX = `peer col-start-1 row-start-1 m-0 size-4 cursor-pointer appearance-none rounded-sm border border-line-strong transition-colors checked:border-transparent checked:bg-accent-pressed ${FOCUS}`;
 export const TRACK = "flex h-8 gap-0.5 rounded-lg bg-control-subtle p-0.5";
 export const SEGMENT = `flex-1 cursor-pointer truncate rounded-md px-2 text-label text-fg-subtle transition-colors hover:text-fg aria-pressed:bg-control aria-pressed:text-fg ${FOCUS}`;
+export const CHIP_ROW =
+    "-mx-4 flex gap-1.5 overflow-x-auto pr-8 pl-4 [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent,black_16px,black_calc(100%-32px),transparent)]";
+export const CHIP = `h-7 shrink-0 cursor-pointer rounded-full border border-line px-3 text-label whitespace-nowrap text-fg-muted transition-colors hover:bg-hover hover:text-fg aria-pressed:border-transparent aria-pressed:bg-accent-subtle aria-pressed:text-accent-text ${FOCUS}`;
+export const PATTERN_GRID =
+    "grid max-h-56 grid-cols-3 gap-1 overflow-y-auto overscroll-contain rounded-xl bg-section p-1 [scrollbar-width:thin] [scrollbar-color:var(--color-line-strong)_transparent]";
+export const PATTERN_TILE = `group flex min-w-0 cursor-pointer flex-col gap-1 rounded-lg p-1 text-caption text-fg-subtle transition-colors hover:bg-hover hover:text-fg aria-pressed:bg-control aria-pressed:text-fg ${FOCUS}`;
+export const THUMB =
+    "aspect-[8/5] w-full rounded-md bg-(--thumb-board) ring-1 ring-line group-aria-pressed:ring-2 group-aria-pressed:ring-accent";

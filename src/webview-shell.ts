@@ -5,20 +5,35 @@ import {
     SECONDARY,
     SECTION,
     SECTION_LABEL,
-    SEGMENT,
+    CHIP,
+    CHIP_ROW,
+    PATTERN_GRID,
+    PATTERN_TILE,
     SLIDER,
     SWATCH,
-    TRACK,
+    THUMB,
 } from "../webview/classes";
 import { PANEL_CSS } from "./panel-css";
-import { PATTERNS, PRESETS, SLIDERS } from "./settings";
+import { GROUP_LABELS, PATTERNS, PATTERN_GROUPS } from "./patterns";
+import { PRESETS, SLIDERS } from "./settings";
 
 const TICK =
     '<svg class="pointer-events-none invisible col-start-1 row-start-1 size-3 text-on-accent peer-checked:visible" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"/></svg>';
 
-const patternButtons = PATTERNS.map(
+const THUMB_W = 88;
+const THUMB_H = 55;
+
+const groupChips = [
+    `<button type="button" class="${CHIP}" data-group-filter="all" aria-pressed="true">All</button>`,
+    ...PATTERN_GROUPS.map(
+        (g) =>
+            `<button type="button" class="${CHIP}" data-group-filter="${g}" aria-pressed="false">${GROUP_LABELS[g]}</button>`
+    ),
+].join("\n");
+
+const patternTiles = PATTERNS.map(
     (p) =>
-        `<button type="button" class="${SEGMENT}" data-pattern="${p.id}" aria-pressed="false">${p.label}</button>`
+        `<button type="button" class="${PATTERN_TILE}" data-pattern="${p.id}" data-group="${p.group}" aria-pressed="false"><canvas class="${THUMB}" data-thumb="${p.id}" data-w="${THUMB_W}" data-h="${THUMB_H}" aria-hidden="true"></canvas><span class="truncate">${p.label}</span></button>`
 ).join("\n");
 
 const presetButtons = PRESETS.map(
@@ -40,9 +55,12 @@ const BODY = `
         <button type="button" id="reset" class="${SECONDARY}">Reset</button>
     </div>
     <section class="${SECTION}">
-        <div class="${SECTION_LABEL}"><span>Pattern</span></div>
-        <div class="${TRACK}" role="group" aria-label="Pattern">
-${patternButtons}
+        <div class="${SECTION_LABEL}"><span>Pattern</span><span id="pattern-name" class="text-fg-subtle"></span></div>
+        <div class="${CHIP_ROW}" role="group" aria-label="Pattern groups">
+${groupChips}
+        </div>
+        <div class="${PATTERN_GRID}" role="group" aria-label="Pattern">
+${patternTiles}
         </div>
     </section>
     <section class="${SECTION}">

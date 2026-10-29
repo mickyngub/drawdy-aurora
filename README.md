@@ -2,14 +2,14 @@
 
 **let your board glow.**
 
-A living pattern drifts across your whole board while you draw: aurora curtains, a textmode glyph wave, halftone dots or contour lines. Pick a pattern and a starting point, tune it with a few sliders, and watch the board change as you drag.
+A living pattern drifts across your whole board while you draw. Pick one of 30 designs, from aurora curtains and caustics to contour lines, hexagons, code rain and a synthwave horizon, then tune it with a few sliders and watch the board change as you drag.
 
 ---
 
 ## let's glow ٩(◕‿◕)۶
 
 1. Click the **aurora waves** in the extension rail. The Aurora panel opens and the glow fades in.
-2. Pick a **Pattern**, then a colour set under **Start from**.
+2. Scroll the **Pattern** grid (or tap Glow, Lines, Grid or Retro to narrow it), then pick a colour set under **Start from**.
 3. Drag the sliders to make it yours; the board follows as you drag.
 4. Untick **Show the aurora** to turn it off. Your look is kept for next time.
 
@@ -19,12 +19,12 @@ A living pattern drifts across your whole board while you draw: aurora curtains,
 
 ## make it yours (｡•̀ᴗ-)✧
 
-- **Pattern**: Curtains, Glyphs, Dots or Contours.
+- **Pattern**: 30 designs in four groups. **Glow**: Curtains, Clouds, Lava, Mesh, Rays, Caustics, Bokeh, Smoke. **Lines**: Contours, Flow, Waves, Moiré, Ripples, Stripes, Ridges, Hatch. **Grid**: Dots, Grid, Hexagons, Truchet, Checker, Triangles, Cells. **Retro**: Glyphs, Code rain, ASCII, Dither, Plasma, Horizon, Stars.
 - **Start from**: Aurora, Ocean, Sunset, Nebula, Ember, Quiet, Mono or Neon, each with its own colours and slider settings.
 - **Strength**: from a whisper to a full sky.
 - **Speed**: from frozen to lively.
 - **Colour shift**: turns every colour of the starting point around the colour wheel.
-- **Scale**: curtain height, glyph cell size, dot spacing or contour line spacing, depending on the pattern.
+- **Scale**: the size of the pattern's main feature, named for each pattern (curtain height, cell size, line spacing and so on).
 - **Haze**: the soft glow between the curtains.
 - **Reset** takes the sliders back to the starting point you picked.
 

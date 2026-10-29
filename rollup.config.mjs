@@ -2,30 +2,16 @@ import typescript from "@rollup/plugin-typescript";
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { dirname, join, resolve } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { patternSources, rawText } from "./scripts/rollup-plugins.mjs";
 
 const pkgRoot = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 const tsconfig = join(pkgRoot, "tsconfig.json");
+const PATTERN_DIR = join(pkgRoot, "overlay", "patterns");
 const LOOK_SLOT = "__AURORA_LOOK__";
 const SCHEME_SLOT = "__AURORA_SCHEME__";
-
-function rawText() {
-    return {
-        name: "raw-text",
-        resolveId(source, importer) {
-            if (!source.endsWith("?raw") || !importer) return null;
-            return resolve(dirname(importer), source);
-        },
-        load(id) {
-            if (!id.endsWith("?raw")) return null;
-            const file = id.slice(0, -"?raw".length);
-            this.addWatchFile(file);
-            return `export default ${JSON.stringify(readFileSync(file, "utf8"))};`;
-        },
-    };
-}
 
 function overlayHtml() {
     return {
@@ -93,7 +79,7 @@ function webviewHtml() {
 const webview = {
     input: "webview/main.ts",
     output: { file: "dist/webview.js", format: "iife" },
-    plugins: [typescript({ tsconfig })],
+    plugins: [patternSources(PATTERN_DIR), rawText(), typescript({ tsconfig })],
 };
 
 const shell = {
@@ -105,7 +91,12 @@ const shell = {
 const overlay = {
     input: "overlay/main.ts",
     output: { file: "dist/overlay.js", format: "iife" },
-    plugins: [rawText(), typescript({ tsconfig }), overlayHtml()],
+    plugins: [
+        patternSources(PATTERN_DIR),
+        rawText(),
+        typescript({ tsconfig }),
+        overlayHtml(),
+    ],
 };
 
 const driver = {

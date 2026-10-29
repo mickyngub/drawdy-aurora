@@ -9,20 +9,13 @@ import {
     ACK_MESSAGE,
     SETTINGS_MESSAGE,
     readSettings,
-    type PatternId,
     type Settings,
 } from "../src/settings";
+import type { PatternId } from "../src/patterns";
+import builds from "virtual:aurora-patterns";
 import { labStops, rotateHexHue } from "./webgl/core/color";
 import type { SurfaceHandle } from "./webgl/core/types";
 import { mountCustom } from "./webgl/vanilla/mount-custom";
-// @ts-ignore -- text import provided by rollup.config.mjs
-import contoursSource from "./patterns/contours.frag.glsl?raw";
-// @ts-ignore -- text import provided by rollup.config.mjs
-import curtainsSource from "./patterns/curtains.frag.glsl?raw";
-// @ts-ignore -- text import provided by rollup.config.mjs
-import dotsSource from "./patterns/dots.frag.glsl?raw";
-// @ts-ignore -- text import provided by rollup.config.mjs
-import glyphsSource from "./patterns/glyphs.frag.glsl?raw";
 
 const FALLBACK_CLASS = "bg-(image:--hero-fallback)";
 const TOOLBAR_PX = 64;
@@ -61,37 +54,6 @@ const syncFallback = () => {
 reduced.addEventListener("change", syncFallback);
 syncFallback();
 
-// The soft curtains can render at half resolution; the crisp patterns need every pixel.
-const PATTERN_SETUP: Record<
-    PatternId,
-    { source: string; renderScale: number; maxDpr: number; grain: boolean }
-> = {
-    curtains: {
-        source: curtainsSource as string,
-        renderScale: 0.5,
-        maxDpr: 1,
-        grain: true,
-    },
-    glyphs: {
-        source: glyphsSource as string,
-        renderScale: 1,
-        maxDpr: 2,
-        grain: false,
-    },
-    dots: {
-        source: dotsSource as string,
-        renderScale: 1,
-        maxDpr: 2,
-        grain: false,
-    },
-    contours: {
-        source: contoursSource as string,
-        renderScale: 1,
-        maxDpr: 2,
-        grain: false,
-    },
-};
-
 let toolbarShare = TOOLBAR_PX / innerHeight;
 let viewport = [innerWidth, innerHeight] as const;
 addEventListener("resize", () => {
@@ -118,7 +80,7 @@ addEventListener("message", (event) => {
 let phase: number | null = null;
 
 function mount(pattern: PatternId): SurfaceHandle {
-    const setup = PATTERN_SETUP[pattern];
+    const setup = builds[pattern] ?? builds.curtains;
     paletteDirty = true;
     return mountCustom(
         body,

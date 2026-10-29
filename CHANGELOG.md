@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+- 30 patterns in four groups (Glow, Lines, Grid and Retro), picked from a scrollable grid of live thumbnails
+- group chips above the grid to narrow it down
+- the thumbnails follow your colour set, colour shift and haze
+
 ## 0.3.0
 
 - four patterns: Curtains, Glyphs (a textmode wave of rings and crosses), Dots and Contours

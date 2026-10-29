@@ -1,4 +1,4 @@
-export type PatternId = "curtains" | "glyphs" | "dots" | "contours";
+import { isPatternId, patternById, type PatternId } from "./patterns";
 
 export type PresetId =
     | "aurora"
@@ -24,8 +24,6 @@ export type Settings = {
 
 export type SliderKey = Exclude<keyof Settings, "pattern" | "preset">;
 
-export type Pattern = { id: PatternId; label: string; scaleLabel: string };
-
 export type Preset = {
     id: PresetId;
     label: string;
@@ -42,13 +40,6 @@ export type Slider = {
     step: number;
     format: (value: number) => string;
 };
-
-export const PATTERNS: readonly Pattern[] = [
-    { id: "curtains", label: "Curtains", scaleLabel: "Curtain height" },
-    { id: "glyphs", label: "Glyphs", scaleLabel: "Cell size" },
-    { id: "dots", label: "Dots", scaleLabel: "Dot spacing" },
-    { id: "contours", label: "Contours", scaleLabel: "Line spacing" },
-];
 
 export const PRESETS: readonly Preset[] = [
     {
@@ -160,9 +151,6 @@ export const ACK_MESSAGE = "mickyngub.aurora:ack";
 export const presetById = (id: PresetId): Preset =>
     PRESETS.find((p) => p.id === id) ?? PRESETS[0];
 
-export const patternById = (id: PatternId): Pattern =>
-    PATTERNS.find((p) => p.id === id) ?? PATTERNS[0];
-
 export const startFrom = (
     id: PresetId,
     pattern: PatternId = "curtains"
@@ -180,8 +168,7 @@ export function readSettings(value: unknown): Settings {
             ? (value as Record<string, unknown>)
             : {};
     const preset = PRESETS.find((p) => p.id === raw.preset)?.id ?? "aurora";
-    const pattern =
-        PATTERNS.find((p) => p.id === raw.pattern)?.id ?? "curtains";
+    const pattern = isPatternId(raw.pattern) ? raw.pattern : "curtains";
     const settings = startFrom(preset, pattern);
     for (const { key, min, max } of SLIDERS) {
         const n = raw[key];

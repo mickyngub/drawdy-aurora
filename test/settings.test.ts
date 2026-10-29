@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { paletteFor, strengthFor } from "../src/look";
+import { PATTERNS } from "../src/patterns";
 import {
     DEFAULT_SETTINGS,
-    PATTERNS,
     PRESETS,
     SLIDERS,
     readSettings,

@@ -1,8 +1,8 @@
 {
     "driverId": "mickyngub.aurora",
     "driverName": "Aurora",
-    "driverVersion": "0.3.0",
-    "description": "Let your board glow. Click the aurora button and a living pattern drifts across your whole board while you draw: aurora curtains, a textmode glyph wave, halftone dots or contour lines. Start from one of eight colour sets, then tune strength, speed, colour, scale and haze, live as you drag. Clicks pass straight through and only you see it. Made for long whiteboard sessions, late-night sketching and screen shares that need a little mood.",
+    "driverVersion": "0.4.0",
+    "description": "Let your board glow. Click the aurora button and a living pattern drifts across your whole board while you draw. Pick from 30 designs in four groups, from aurora curtains and caustics to contour lines, hexagons, code rain and a synthwave horizon. Start from one of eight colour sets, then tune strength, speed, colour, scale and haze live as you drag. Clicks pass straight through and only you see it. Made for long whiteboard sessions and screen shares that need a little mood.",
     "icon": "icon.png",
     "main": "main.js",
     "permissions": ["dom", "storage"]

@@ -15,6 +15,7 @@
         "src",
         "overlay",
         "webview",
+        "scripts/gallery",
         "bundle.ts",
         "vite.config.ts",
         "vite-plugin-drawdy.ts",
