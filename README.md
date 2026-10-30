@@ -2,7 +2,9 @@
 
 **let your board glow.**
 
-A living pattern drifts across your whole board while you draw. Pick one of 30 designs, from aurora curtains and caustics to contour lines, hexagons, code rain and a synthwave horizon, then tune it with a few sliders and watch the board change as you drag.
+A living pattern drifts across your whole board while you draw. Pick one of 30 designs, from aurora curtains and caustics to contour lines, hexagons, code rain and a synthwave horizon, then tune it with a few sliders and watch the board change as you drag. ✧
+
+![Aurora's green curtains glow behind a flowchart sketch. Picking Nebula turns them violet, the Grid chip and Hexagons swap in a honeycomb, the Retro chip and Horizon bring a synthwave sun, Neon recolours it, and dragging Colour shift turns it orange.](https://raw.githubusercontent.com/mickyngub/drawdy-aurora/main/docs/media/aurora.gif)
 
 ---
 
@@ -40,4 +42,4 @@ A living pattern drifts across your whole board while you draw. Pick one of 30 d
 
 ---
 
-**the small print**: nothing downloads and nothing goes on your board; only you see the aurora. It sits over the board, so your drawings show a faint tint and every click goes straight through. Your starting point, sliders and on or off are kept in this browser. It follows Drawdy's light or dark theme. Code [MIT](https://github.com/mickyngub/drawdy-aurora/blob/main/LICENSE); building it yourself? See [DEVELOPMENT.md](https://github.com/mickyngub/drawdy-aurora/blob/main/DEVELOPMENT.md).
+**the small print**: the panel's font, Google Sans Flex (OFL), loads from jsDelivr; nothing else downloads, nothing you draw leaves your board, and nothing is added to it: only you see the aurora. It sits over the board, so your drawings show a faint tint and every click goes straight through. Your starting point, sliders and on or off are kept in this browser. It follows Drawdy's light or dark theme. Code [MIT](https://github.com/mickyngub/drawdy-aurora/blob/main/LICENSE); building it yourself? See [DEVELOPMENT.md](https://github.com/mickyngub/drawdy-aurora/blob/main/DEVELOPMENT.md).
