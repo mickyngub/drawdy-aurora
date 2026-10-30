@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0
+
+- first release on the Drawdy marketplace, with everything below
+- a how-to GIF on the listing page
+
 ## 0.4.0
 
 - 30 patterns in four groups (Glow, Lines, Grid and Retro), picked from a scrollable grid of live thumbnails
